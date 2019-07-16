@@ -14,6 +14,7 @@ switch ($type) {
         $result['height'] = "{$imageInfo[1]}";
         $result['mime'] = "{$imageInfo['mime']}";
         $result['size'] = "{$imageSize}";
+        header('Access-Control-Allow-Origin:*'); 
         header('Content-type:text/json');
         echo json_encode($result);
         break;
