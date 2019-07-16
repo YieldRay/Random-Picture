@@ -20,24 +20,29 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
-      <h3>直接调用</h3>
+      <div class="card">
+      <h3 class="card-title">直接调用</h3>
       <p>访问index.php即可，跳转至图片地址</p>
       <p>访问?id=数字，跳转至制定图片</p>
-    </div>
+    </div></div>
     <div class="col-sm-4">
-      <h3>访问?type=output</h3>
+      <div class="card">
+      <h3 class="card-title">访问?type=output</h3>
       <p>服务器读取图片后输出</p>
       <p>不建议使用</p>
-    </div>
+    </div></div>
     <div class="col-sm-4">
-      <h3>访问?type=json</h3> 
+      <div class="card">
+      <h3 class="card-title">访问?type=json</h3> 
       <p>输出json</p>
-      <p><div class="panel panel-default"><code>{"code":"200","url":"https:\/\/fp1.fghrsh.net\/2019\/07\/15\/c2549aaa63db078834ead6a92fe63b61.jpg","width":"1920","height":"1080","mime":"image\/jpeg","size":"821735"}</code></div></p>
+      <p><code>{"code":"200","url":"https:\/\/fp1.fghrsh.net\/2019\/07\/15\/c2549aaa63db078834ead6a92fe63b61.jpg","width":"1920","height":"1080","mime":"image\/jpeg","size":"821735"}</code></p>
+     </div></div>
         <div class="col-sm-4">
-      <h3>访问?type=js</h3>
+          <div class="card">
+      <h3 class="card-title">访问?type=js</h3>
       <p>输出js</p>
       <p><code>var pic_random='https://fp1.fghrsh.net/2019/07/15/aceb221b57c4987ac324e10aeaf69ede.jpg';<br>
         var pic_end=34;  //最后一张图片的id<br>
         var pic_rdn=25;  //随机图片的id，每次不同<code></p>
-    </div>
+    </div></div>
     </div>
