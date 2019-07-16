@@ -1,48 +1,62 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>随机图片api</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
-  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
-  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-</head>
-<body>
+ <head> 
+  <title>随机图片api</title> 
+  <meta charset="utf-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+  <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css" /> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+  <script>
+$(document).ready(function() {
 
-<div class="jumbotron text-center">
-  <h1>随机图片api</h1>
-  <p>先随便写一个文档</p> 
-  <p>图片地址存储于url.txt，一行一个</p>
-</div>
- 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="card">
-      <h3 class="card-title">直接调用</h3>
-      <p>访问index.php即可，跳转至图片地址</p>
-      <p>访问?id=数字，跳转至指定图片</p>
-    </div></div>
-    <div class="col-sm-4">
-      <div class="card">
-      <h3 class="card-title">访问?type=output</h3>
-      <p>服务器读取图片后输出</p>
-      <p>不建议使用</p>
-    </div></div>
-    <div class="col-sm-4">
-      <div class="card">
-      <h3 class="card-title">访问?type=json</h3> 
-      <p>输出json</p>
-      <p><code>{"code":"200","url":"https:\/\/fp1.fghrsh.net\/2019\/07\/15\/c2549aaa63db078834ead6a92fe63b61.jpg","width":"1920","height":"1080","mime":"image\/jpeg","size":"821735"}</code></p>
-     </div></div>
-        <div class="col-sm-4">
-          <div class="card">
-      <h3 class="card-title">访问?type=js</h3>
-      <p>输出js</p>
-      <p><code>var pic_random='https://fp1.fghrsh.net/2019/07/15/aceb221b57c4987ac324e10aeaf69ede.jpg';<br>
-        var pic_end=34;  //最后一张图片的id<br>
-        var pic_rdn=25;  //随机图片的id，每次不同<code></p>
-    </div></div>
-    </div>
+    $('.scroll-down, .get-started').on('click', function(e) {
+        e.preventDefault()
+        $('html, body').animate({
+            scrollTop: $('section:first-of-type').offset().top
+        }, 300)
+    })
+
+})
+</script> 
+<style>header{background:#a0e5e4}.get-started{background:#43ccc8;border:3px solid #50d0cc;}</style>
+ </head> 
+ <body> 
+  <header> 
+   <h1 class="title">随机图片api</h1> 
+   <h2 class="subtitle">这是一个说明文档</h2> 
+   <p class="disclaimer">注意:图片地址存储于url.txt，一行一个</p> 
+   <button class="get-started button button-primary button-large">详情</button> 
+   <a class="scroll-down" href="#"></a> 
+  </header> 
+  <section> 
+   <p class="h3"><strong>直接调用</strong></p> 
+   <p>访问index.php即可，跳转至图片地址</p> 
+   <p>访问?id=数字，跳转至指定图片</p> 
+  </section> 
+  <section> 
+   <p class="h3"><strong>访问?type=output</strong></p> 
+   <p>服务器读取图片后输出</p> 
+   <p>不建议使用</p> 
+  </section> 
+  <section> 
+   <p class="h3"><strong>访问?type=json</strong></p> 
+   <p>服务器读取图片后输出</p> 
+   <pre class="language-html">
+    <code class="language-html">     
+{&quot;code&quot;:&quot;200&quot;,&quot;url&quot;:&quot;https:\/\/fp1.fghrsh.net\/2019\/07\/15\/c2549aaa63db078834ead6a92fe63b61.jpg&quot;,&quot;width&quot;:&quot;1920&quot;,&quot;height&quot;:&quot;1080&quot;,&quot;mime&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:&quot;821735&quot;}
+    </code>
+</pre> 
+  </section> 
+  <section> 
+   <p class="h3"><strong>访问?type=js</strong></p> 
+   <p>输出js</p> 
+   <pre class="language-html">
+    <code class="language-html">
+        var pic_random='https://fp1.fghrsh.net/2019/07/15/aceb221b57c4987ac324e10aeaf69ede.jpg';<br />
+        var pic_end=34;  //最后一张图片的id<br />
+        var pic_rdn=25;  //随机图片的id，每次不同
+    </code>
+</pre> 
+  </section>  
+ </body>
+</html>
