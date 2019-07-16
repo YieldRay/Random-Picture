@@ -3,8 +3,8 @@ $url = explode("\n", file_get_contents('url.txt'));
 $i = rand(0, count($url));
 $x = $url[rand(0, $i)];
 $img = file_get_contents($x, true);
-$id = $_GET['id'];
-$type = $_GET['type'];
+$id = $_REQUEST['id'];
+$type = $_REQUEST['type'];
 $result = array("code" => "200", "url" => "{$x}");
 switch ($type) {
     case json:
@@ -38,8 +38,8 @@ switch ($type) {
         break;
     default:
         if ($id == "") {
-            header("Location:{$x}");
+            header("Location:$x");
         } else {
-            header("Location:{$id}");
+            header("Location:$url[$id]");
         }
 }
