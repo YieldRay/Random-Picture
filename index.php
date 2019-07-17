@@ -1,8 +1,7 @@
 <?php
-$url = explode("\n", file_get_contents('url.txt'));
-$i = rand(0, count($url));
-$x = $url[rand(0, $i)];
-$img = file_get_contents($x, true);
+$url = explode("\n", file_get_contents('url.txt'));//url数组
+$i = rand(0, count($url));//随机id
+$x = $url[rand(0, $i)];//随机图片
 $id = $_REQUEST['id'];
 $type = $_REQUEST['type'];
 switch ($type) {
@@ -34,7 +33,7 @@ switch ($type) {
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
         header("Cache-Control: no-cache");
         header("Pragma: no-cache");
-        echo $img;
+        echo file_get_contents($x, true);
         break;
     default:
         if ($id == "") {
