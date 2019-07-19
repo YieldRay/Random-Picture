@@ -4,9 +4,9 @@
 
 
 
-## [直接调用](http://miku.ueuo.com/)
+## 访问[index.php](http://miku.ueuo.com/)
 
-访问index.php即可，跳转至图片地址   
+直接跳转至图片地址   
 
 访问?id=数字，跳转至指定图片
 
