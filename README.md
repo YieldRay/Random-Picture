@@ -1,6 +1,6 @@
 # Random-Picture
 随机图片api    
-实验地址<http://miku.ueuo.com/>*无稳定性保证*
+实验地址  <http://miku.ueuo.com/>(*无稳定性保证*)
 
 
 
@@ -29,7 +29,7 @@
 
 输出js
 ```
-        var pic_random='https://fp1.fghrsh.net/2019/07/15/aceb221b57c4987ac324e10aeaf69ede.jpg';
-        var pic_end=34;  //最后一张图片的id
-        var pic_rdn=25;  //随机图片的id，每次不同
+ var pic_random='https://fp1.fghrsh.net/2019/07/15/aceb221b57c4987ac324e10aeaf69ede.jpg';
+ var pic_end=34;  //最后一张图片的id
+ var pic_rdn=25;  //随机图片的id，每次不同
 ```
