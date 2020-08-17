@@ -1,0 +1,21 @@
+{
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.3.1",
+      "excludeFiles": "{test/**}",
+      "memory": 512,
+      "maxDuration": 5
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/index.php",
+      "headers" : [
+        {
+          "key" : "Cache-Control",
+          "value" : "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
