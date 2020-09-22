@@ -5,7 +5,7 @@ const NOT_FOUND_IMG = "https://i.loli.net/2020/08/17/J7ZU2VAHPQTbcy8.png";
 if (file_exists('../url.txt')) {
     $url = file('../url.txt', FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
 } else {
-    $url = file('http://' .$_SERVER['HTTP_HOST']. '/url.txt', FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
+    $url = file('https://' .$_SERVER['HTTP_HOST']. '/url.txt', FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
 }
 
 $id = $_REQUEST['id'];
@@ -28,8 +28,13 @@ if (!$is_empty && $id > $length) {
  * 只使用以下变量
  * $code $target_url $length
  */
-
+header('Access-Control-Max-Age: 86400');  //1day
 header('Access-Control-Allow-Origin:*'); 
+if(is_string($_REQUEST["cache"])){
+    header("Cache-Control: no-cache");
+} else {
+    header("Cache-Control: public, max-age=86400");
+}
 switch ($type) {
     case 'length':
         echo $length;
@@ -52,8 +57,6 @@ switch ($type) {
         break;
     case 'output':
         header($header);
-        header("Cache-Control: no-cache");
-        header("Pragma: no-cache");
         if (ALLOW_OUTPUT) {
             header('Content-type:image/png');
             echo file_get_contents($target_url);

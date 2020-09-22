@@ -47,6 +47,8 @@
     <p>访问./api/?id=数字，跳转至指定图片</p>
     <p>注：api附加参数 api=数字 亦可跳转至指定图片</p>
     <p>如：<a href="./api/?type=json&id=3">./api/?type=json&id=3</a></p>
+    <p>另：若包含参数cache (./api/?cache  ./api/?type=length&cache) 则请求缓存一天</p>
+    <p>使用：通过脚本发起请求时，附加随机参数 ('./api/?cache&r=' + Math.random())则可能通过url找回图片</p>
   </section>
   <section>
     <h3><strong>访问<a href="./api/?type=length">./api/?type=length</a></strong></h3>
