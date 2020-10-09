@@ -1,72 +1,74 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>随机图片api</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/" />
+        <link rel="preload" href="https://cdn.jsdelivr.net/gh/kylelogue/mustard-ui/dist/css/mustard-ui.min.css" as="style" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kylelogue/mustard-ui/dist/css/mustard-ui.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.scroll-down, .get-started').on('click', function (e) {
+                    e.preventDefault();
+                    $('html, body').animate(
+                        {
+                            scrollTop: $('section:first-of-type').offset().top,
+                        },
+                        300
+                    );
+                });
+            });
+        </script>
+        <style>
+            header {
+                background: #a0e5e4;
+            }
 
-<head>
-  <title>随机图片api</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/">
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/kylelogue/mustard-ui/dist/css/mustard-ui.min.css" as="style">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kylelogue/mustard-ui/dist/css/mustard-ui.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('.scroll-down, .get-started').on('click', function (e) {
-        e.preventDefault()
-        $('html, body').animate({
-          scrollTop: $('section:first-of-type').offset().top
-        }, 300)
-      })
-    });
+            .get-started {
+                background: #43ccc8;
+                border: 3px solid #50d0cc;
+            }
 
-  </script>
-  <style>
-    header {
-      background: #a0e5e4
-    }
+            * {
+                word-break: break-all;
+            }
 
-    .get-started {
-      background: #43ccc8;
-      border: 3px solid #50d0cc
-    }
+            .panel img {
+                width: 100%;
+            }
 
-    * {
-      word-break: break-all
-    }
+            .right {
+                float: right;
+            }
+        </style>
+    </head>
 
-    .panel img {
-      width: 100%
-    }
+    <body>
+        <header>
+            <h1 class="title">随机图片api</h1>
+            <h2 class="subtitle">图片一览</h2>
+            <p class="disclaimer"><a href="index.html">查看说明文档</a></p>
+            <button class="get-started button button-primary button-large">详情</button>
+            <a class="scroll-down" href="#"></a>
+        </header>
+        <section>
+            <div class="row" id="output"></div>
+        </section>
+        <footer>
+            <p class="copyright align-center">
+                Made by <a href="https://blog.poo.li/">Crazy白茫茫</a>. <a href="https://github.com/Crazy-White/Random-Picture">Github(Source Code)</a>
+            </p>
+        </footer>
 
-    .right {
-      float: right
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <h1 class="title">随机图片api</h1>
-    <h2 class="subtitle">图片一览</h2>
-    <p class="disclaimer"><a href="index.html">查看说明文档</a></p>
-    <button class="get-started button button-primary button-large">详情</button>
-    <a class="scroll-down" href="#"></a>
-  </header>
-  <section>
-    <div class="row" id="output">
-
-    </div>
-  </section>
-  <footer>
-    <p class="copyright align-center">Made by <a href="https://blog.poo.li/">Crazy白茫茫</a>. <a
-        href="https://github.com/Crazy-White/Random-Picture">Github(Source Code)</a></p>
-  </footer>
-
-  <script>
-    $.get("./url.txt", function (data) {
-      data.split(/\r\n|\r|\n/).filter(e=>e.length>2).forEach((item, index) => {
-        document.getElementById('output').innerHTML += `
+        <script>
+            $.get('./url.csv', function (data) {
+                data.split(/\r\n|\r|\n/)
+                    .filter(e => e.length > 2)
+                    .forEach((item, index) => {
+                        document.getElementById('output').innerHTML += `
         <div class="col col-xs-12 col-sm-6 col-md-4 col-lg-3">
         <div class="panel">
           <div class="panel-head">
@@ -77,13 +79,12 @@
             <button onclick="window.open('${item}')" class="button-primary right">查看图片</button>
           </div>
         </div>
-      </div>`
-      });
-      const observer = lozad();
-      observer.observe();
-    });
-  </script>
-  <!--</body>-->
-</body>
-
+      </div>`;
+                    });
+                const observer = lozad();
+                observer.observe();
+            });
+        </script>
+        <!--</body>-->
+    </body>
 </html>
