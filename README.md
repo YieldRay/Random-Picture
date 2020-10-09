@@ -1,24 +1,41 @@
 # Random-Picture
 
-随机图片api
-JUST FOR FUN
+随机图片 api
 
 ## 实验地址:
 
-[http://miku.ueuo.com/](http://miku.ueuo.com/)*(无稳定性保证)*
-[https://random-picture.vercel.app/](https://random-picture.vercel.app/)*(部署到vercel)*
+[http://miku.ueuo.com/](http://miku.ueuo.com/)_(无稳定性保证)_
+[https://random-picture.vercel.app/](https://random-picture.vercel.app/)_(部署到 vercel)_
 
 ### 注意:
 
-| 路径 | 说明 |
-| --- | --- |
-| ./url.txt | 务必一行一个url，不要输入不完整的url |
-| ./api/index.php | 修改ALLOW_OUTPUT以开启output |
+| 路径            | 说明                                   |
+| --------------- | -------------------------------------- |
+| ./url.csv       | 务必一行一个 url，不要输入不完整的 url |
+| ./api/index.php | 修改 ALLOW_OUTPUT 以开启服务器输出     |
 
-## 部署到vercel
+## 部署到 Vercel
 
-建议fork后，自行修改配置，然后在vercel平台上导入自己的项目
+建议 fork 后，自行修改配置，然后在 Vercel 平台上导入自己的项目  
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?s=https%3A%2F%2Fgithub.com%2FCrazy-White%2FRandom-Picture)
+
+## 关于 Rewrite
+
+伪静态是可选的。  
+开启伪静态后，将支持以<https://example.net/:id.png>形式访问  
+**:id** 即图片 id，如果非数字，则随机跳转。请求会被缓存。  
+Apache 和 Vercel 部署都直接支持伪静态。  
+Nginx 参照以下配置：
+
+```nginx
+location / {
+        if (!-e $request_filename) {
+            rewrite  ^(\w)*\.(?:jpg|jpeg|png|gif|bmp|webp)$  /api/index.php?id=$1  last;
+        }
+}
+```
+
+## Doc
 
 <section>
     <h3><strong>直接调用</strong></h3>
@@ -26,8 +43,6 @@ JUST FOR FUN
     <p>访问./api/?id=数字，跳转至指定图片</p>
     <p>注：api附加参数 api=数字 亦可跳转至指定图片</p>
     <p>如：<a href="./api/?type=json&id=3">./api/?type=json&id=3</a></p>
-    <p>另：若包含参数cache (./api/?cache  ./api/?type=length&cache) 则请求缓存一天</p>
-    <p>使用：通过脚本发起请求时，附加随机参数 ('./api/?cache&r=' + Math.random())则可能通过url找回图片</p>
   </section>
   <section>
     <h3><strong>访问<a href="./api/?type=length">./api/?type=length</a></strong></h3>

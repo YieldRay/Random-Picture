@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(\w)*\.(?:jpg|jpeg|png|gif|bmp|webp) api/index.php?id=$1 [L]
+</IfModule>
