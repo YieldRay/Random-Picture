@@ -17,7 +17,7 @@
                         {
                             scrollTop: $('section:first-of-type').offset().top,
                         },
-                        300
+                        300,
                     );
                 });
             });
@@ -51,24 +51,35 @@
             <h1 class="title">随机图片api</h1>
             <h2 class="subtitle">图片一览</h2>
             <p class="disclaimer"><a href="index.html">查看说明文档</a></p>
-            <button class="get-started button button-primary button-large">详情</button>
+            <button class="get-started button button-primary button-large">
+                详情
+            </button>
             <a class="scroll-down" href="#"></a>
         </header>
         <section>
-            <div class="row" id="output"></div>
+            <div class="row" id="output">
+                <strong>Error!</strong>
+                &nbsp;&nbsp;
+                <i>No images can be shown.</i>
+            </div>
         </section>
         <footer>
             <p class="copyright align-center">
-                Made by <a href="https://blog.poo.li/">Crazy白茫茫</a>. <a href="https://github.com/Crazy-White/Random-Picture">Github(Source Code)</a>
+                Made by
+                <a href="https://blog.poo.li/">Crazy白茫茫</a>
+                .
+                <a href="https://github.com/Crazy-White/Random-Picture">Github(Source Code)</a>
             </p>
         </footer>
 
         <script>
             $.get('./url.csv', function (data) {
+                let html = '';
+                document.getElementById('output').innerHTML = '';
                 data.split(/\r\n|\r|\n/)
                     .filter(e => e.length > 2)
                     .forEach((item, index) => {
-                        document.getElementById('output').innerHTML += `
+                        html += `
         <div class="col col-xs-12 col-sm-6 col-md-4 col-lg-3">
         <div class="panel">
           <div class="panel-head">
@@ -81,6 +92,7 @@
         </div>
       </div>`;
                     });
+                document.getElementById('output').innerHTML = html;
                 const observer = lozad();
                 observer.observe();
             });

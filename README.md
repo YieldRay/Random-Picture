@@ -4,15 +4,15 @@
 
 ## 实验地址:
 
-[http://miku.ueuo.com/](http://miku.ueuo.com/)_(无稳定性保证)_
-[https://random-picture.vercel.app/](https://random-picture.vercel.app/)_(部署到 vercel)_
+<https://illyasviel.feedia.co/> _(无稳定性保证)_  
+<https://random-picture.vercel.app/> _(部署到 vercel)_
 
 ### 注意:
 
-| 路径            | 说明                                   |
-| --------------- | -------------------------------------- |
-| ./url.csv       | 务必一行一个 url，不要输入不完整的 url |
-| ./api/index.php | 修改 ALLOW_OUTPUT 以开启服务器输出     |
+| 路径            | 说明                                                    |
+| --------------- | ------------------------------------------------------- |
+| ./url.csv       | 务必一行一个 url，不要输入不完整的 url                  |
+| ./api/index.php | ALLOW_OUTPUT 是否允许服务器输出；ERROR_IMG 出错时的图片 |
 
 ## 部署到 Vercel
 

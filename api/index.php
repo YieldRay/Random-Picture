@@ -1,12 +1,21 @@
 <?php
 const ALLOW_OUTPUT = false; // 修改以开启
-const NOT_FOUND_IMG = "https://i.loli.net/2020/08/17/J7ZU2VAHPQTbcy8.png";
+const ERROR_IMG = [
+    404 => 'https://http.cat/404',
+    503 => 'https://http.cat/503'
+ ];
 
 if (file_exists('../url.csv')) {
     $url = file('../url.csv', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 } else {
-    $url = file('https://' . $_SERVER['HTTP_HOST'] . '/url.csv', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $url = file('http://' . $_SERVER['HTTP_HOST'] . '/url.csv', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 }
+
+if (empty($url[0])) {
+    $code = 503;
+    $target_url = ERROR_IMG[503];
+}
+
 
 $id         = $_REQUEST['id'];
 $type       = $_REQUEST['type'];
@@ -15,31 +24,33 @@ $final_id   = array_rand($url);
 $is_idValid = false;
 
 if (isset($id)) {
-    header("Cache-Control: public, max-age=86400");
+    header('Cache-Control: public, max-age=86400');
     if (is_numeric($id)) {
-        settype($id, "integer");
+        settype($id, 'integer');
         if ($is_idValid = is_int($id)) {
             $final_id = $id;  // id是整数
         }
     }
 } else {
-    header("Cache-Control: no-cache");
+    header('Cache-Control: no-cache');
 }
 
 
 
-if ($is_idValid && $final_id > $length) {
+if (!$code && $is_idValid && $final_id > $length) {
     // exceed maximum length
     $code       = 404;
-    $target_url = NOT_FOUND_IMG;
+    $target_url = ERROR_IMG[404];
 } else {
     $code       = 200;
     $target_url = $url[$final_id];
 }
 
 /**
- * 只使用以下变量
- * $code $target_url $length
+ * Variables for OUTPUT
+ * $code - mock http code
+ * $target_url - the final url
+ * $length - amount of the images
  */
 header('Access-Control-Max-Age: 86400'); //1day
 header('Access-Control-Allow-Origin: *');
@@ -49,18 +60,18 @@ switch ($type) {
         echo $length;
         break;
     case 'json':
-        $result = array(
-            "code" => $code,
-            "url" => $target_url
-        );
+        $result = [
+            'code' => $code,
+            'url' => $target_url
+        ];
         header('Content-Type: text/json');
         echo json_encode($result);
         break;
     case 'JSON':
-        $result           = array(
-            "code" => $code,
-            "url" => $target_url
-        );
+        $result           = [
+            'code' => $code,
+            'url' => $target_url
+        ];
         $imageInfo        = getimagesize($target_url);
         $imageSize        = get_headers($target_url, 1)['Content-Length'];
         $result['width']  = $imageInfo[0];
@@ -80,5 +91,5 @@ switch ($type) {
         }
         break;
     default:
-        header("Location: $target_url");
+        header('Location: ' . $target_url);
 }
