@@ -1,31 +1,37 @@
 # Random-Picture
 
-随机图片 api
+随机图片 api  
 
 ## 实验地址:
 
-[http://miku.ueuo.com/](http://miku.ueuo.com/)_(无稳定性保证)_
-[https://random-picture.vercel.app/](https://random-picture.vercel.app/)_(部署到 vercel)_
+<https://illyasviel.feedia.co/> _(无稳定性保证)_  
+<https://random-picture.vercel.app/> _(部署到 vercel)_  
+>演示中图片来自<https://www.pixiv.net/users/8236670>  
 
-### 注意:
+## 注意:
 
-| 路径            | 说明                                   |
-| --------------- | -------------------------------------- |
-| ./url.csv       | 务必一行一个 url，不要输入不完整的 url |
-| ./api/index.php | 修改 ALLOW_OUTPUT 以开启服务器输出     |
+| 路径            | 说明                                                    |
+| --------------- | ------------------------------------------------------- |
+| ./url.csv       | 务必一行一个 url，不要输入不完整的 url                  |
+| ./api/index.php | ALLOW_OUTPUT 是否允许服务器输出；ERROR_IMG 出错时的图片 |
 
 ## 部署到 Vercel
 
-建议 fork 后，自行修改配置，然后在 Vercel 平台上导入自己的项目  
+请 fork 后，自行修改配置，然后在 Vercel 平台上导入自己的项目  
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?s=https%3A%2F%2Fgithub.com%2FCrazy-White%2FRandom-Picture)
+
+## 部署到虚拟主机
+
+上传至虚拟主机即可  
 
 ## 关于 Rewrite
 
 伪静态是可选的。  
 开启伪静态后，将支持以<https://example.net/:id.png>形式访问  
+例如<https://random-picture.vercel.app/1.jpg>  <https://random-picture.vercel.app/2.jpg>  
 **:id** 即图片 id，如果非数字，则随机跳转。请求会被缓存。  
 Apache 和 Vercel 部署都直接支持伪静态。  
-Nginx 参照以下配置：
+Nginx 参照以下配置：  
 
 ```nginx
 location / {
@@ -57,7 +63,7 @@ location / {
     <p>服务器输出json</p>
     <pre class="language-json">
     <code class="language-json">     
-{&quot;code&quot;:&quot;200&quot;,&quot;url&quot;:&quot;https:\/\/fp1.fghrsh.net\/2019\/07\/15\/c2549aaa63db078834ead6a92fe63b61.jpg&quot;}
+{&quot;code&quot;:&quot;200&quot;,&quot;url&quot;:&quot;https:\/\/z3.ax1x.com\/2021\/08\/19\/fqD8A0.png&quot;}
     </code>
 </pre>
   </section>
@@ -66,7 +72,7 @@ location / {
     <p>服务器读取图片信息后输出json，如非需要图片信息不建议使用</p>
     <pre class="language-json">
     <code class="language-json">     
-{&quot;code&quot;:&quot;200&quot;,&quot;url&quot;:&quot;https:\/\/fp1.fghrsh.net\/2019\/07\/15\/c2549aaa63db078834ead6a92fe63b61.jpg&quot;,&quot;width&quot;:&quot;1920&quot;,&quot;height&quot;:&quot;1080&quot;,&quot;mime&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:&quot;821735&quot;}
+{&quot;code&quot;:&quot;200&quot;,&quot;url&quot;:&quot;https:\/\/z3.ax1x.com\/2021\/08\/19\/fqD8A0.png&quot;,&quot;width&quot;:&quot;1920&quot;,&quot;height&quot;:&quot;1080&quot;,&quot;mime&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:&quot;821735&quot;}
     </code>
 </pre>
   </section>
