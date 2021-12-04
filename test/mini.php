@@ -1,1 +1,1 @@
-<?php $a=file('url.txt')[array_rand(file('url.csc'))];header("Location:$a");
+<?php $a=file('url.csv')[array_rand(file('url.csv'))];header("Location:$a");
