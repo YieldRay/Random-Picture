@@ -41,68 +41,89 @@
             <button class="get-started button button-primary button-large">详情</button>
             <a class="scroll-down" href="#"></a>
         </header>
-        <section>
-            <h3><strong>直接调用</strong></h3>
-            <p>访问./api即可，跳转至图片地址</p>
-            <p>访问./api/?id=数字，跳转至指定图片</p>
-            <p>注：api附加参数 api=数字 亦可跳转至指定图片</p>
-            <p>
-                如：
-                <a href="./api/?type=json&id=3">./api/?type=json&id=3</a>
-            </p>
-        </section>
-        <section>
-            <h3>
-                <strong>
+        <main>
+            <section>
+                <h3><strong>假定 API 部署到 https://example.net/</strong></h3>
+                <p>
                     访问
-                    <a href="./api/?type=length">./api/?type=length</a>
-                </strong>
-            </h3>
-            <p>返回图片总量，即id的最大值</p>
-        </section>
-        <section>
-            <h3>
-                <strong>
+                    <a href="https://example.net/api">https://example.net/api</a>
+                    ，跳转至图片地址
+                </p>
+                <p>
                     访问
-                    <a href="./api/?type=output">./api/?type=output</a>
-                </strong>
-            </h3>
-            <p>服务器读取后输出，一般不建议使用，默认禁用</p>
-        </section>
-        <section>
-            <h3>
-                <strong>
-                    访问
-                    <a href="./api/?type=json">./api/?type=json</a>
-                </strong>
-            </h3>
-            <p>服务器输出json</p>
-            <pre class="language-json">
+                    <a href="https://example.net/api/?id=数字">https://example.net/api/?id=数字</a>
+                    ，跳转至指定图片
+                </p>
+                <p>
+                    示例
+                    <a href="https://example.net/api/?type=json&id=3">https://example.net/api/?id=3</a>
+                </p>
+                <p>
+                    示例
+                    <a href="https://example.net/api/?type=json&id=3">https://example.net/api/?type=json&id=3</a>
+                </p>
+            </section>
+            <section>
+                <h3>
+                    <strong>
+                        访问
+                        <a href="https://example.net/api/?type=length">https://example.net/api/?type=length</a>
+                    </strong>
+                </h3>
+                <p>返回图片总量，即id上限</p>
+            </section>
+            <section>
+                <h3>
+                    <strong>
+                        访问
+                        <a href="https://example.net/api/?type=output">https://example.net/api/?type=output</a>
+                    </strong>
+                </h3>
+                <p>服务器读取后输出，一般不建议使用，默认禁用</p>
+            </section>
+            <section>
+                <h3>
+                    <strong>
+                        访问
+                        <a href="https://example.net/api/?type=json">https://example.net/api/?type=json</a>
+                    </strong>
+                </h3>
+                <p>服务器输出json</p>
+                <pre class="language-json">
     <code class="language-json">     
 {&quot;code&quot;:&quot;200&quot;,&quot;url&quot;:&quot;https:\/\/fp1.fghrsh.net\/2019\/07\/15\/c2549aaa63db078834ead6a92fe63b61.jpg&quot;}
     </code>
 </pre>
-        </section>
-        <section>
-            <h3>
-                <strong>
-                    访问
-                    <a href="./api/?type=JSON">./api/?type=JSON</a>
-                </strong>
-            </h3>
-            <p>服务器读取图片信息后输出json，如非需要图片信息不建议使用</p>
-            <pre class="language-json">
+            </section>
+            <section>
+                <h3>
+                    <strong>
+                        访问
+                        <a href="https://example.net/api/?type=JSON">https://example.net/api/?type=JSON</a>
+                    </strong>
+                </h3>
+                <p>服务器读取图片信息后输出json，如非需要图片信息不建议使用</p>
+                <pre class="language-json">
     <code class="language-json">     
 {&quot;code&quot;:&quot;200&quot;,&quot;url&quot;:&quot;https:\/\/fp1.fghrsh.net\/2019\/07\/15\/c2549aaa63db078834ead6a92fe63b61.jpg&quot;,&quot;width&quot;:&quot;1920&quot;,&quot;height&quot;:&quot;1080&quot;,&quot;mime&quot;:&quot;image\/jpeg&quot;,&quot;size&quot;:&quot;821735&quot;}
     </code>
 </pre>
-        </section>
+            </section>
+        </main>
+        <script>
+            // $('main a').each(function () {
+            //     $(this).attr('href', $(this).attr('href').replace('https://example.net', location.origin));
+            // });
+            $('main').html(
+                $('main')
+                    .html()
+                    .replace(/https:\/\/example.net/g, location.origin),
+            );
+            // 替换example.net
+        </script>
         <footer>
             <p class="copyright align-center">
-                Made by
-                <a href="https://blog.poo.li/">YieldRay</a>
-                .
-                <a href="https://github.com/yieldray/Random-Picture">Github(Source Code)</a>
+                <a href="https://github.com/yieldray/Random-Picture">Source Code</a>
             </p>
         </footer>
     </body>

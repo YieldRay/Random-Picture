@@ -1,5 +1,3 @@
-// https://developer.mozilla.org/zh-CN/docs/Web/API/HTMLImageElement
-
 const randomPicture = function (arr, timeout = 5000, cb = img => console.log(img)) {
     if (typeof arr === 'string') arr = [arr];
     if (!Array.isArray(arr)) throw new Error('param must be array or string');

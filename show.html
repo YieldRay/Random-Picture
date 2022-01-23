@@ -26,22 +26,17 @@
             header {
                 background: #a0e5e4;
             }
-
             .get-started {
                 background: #43ccc8;
                 border: 3px solid #50d0cc;
             }
-
-            * {
-                word-break: break-all;
-            }
-
             .panel img {
                 width: 100%;
+                min-height: 60px;
             }
-
             .right {
-                float: right;
+                text-align: right;
+                line-height: 16px;
             }
         </style>
     </head>
@@ -81,11 +76,11 @@
         <div class="col col-xs-12 col-sm-6 col-md-4 col-lg-3">
         <div class="panel">
           <div class="panel-head">
-            <p class="panel-title">图片ID:${index}</p>
+            <p class="panel-title">图片ID: ${index}</p>
           </div>
           <img class="lozad" data-src="${item}" alt="${index}" />
-          <div class="panel-footer">
-            <button onclick="window.open('${item}')" class="button-primary right">查看图片</button>
+          <div class="panel-footer right">
+            <a onclick="window.open('${item}')">查看图片</a>
           </div>
         </div>
       </div>`;
