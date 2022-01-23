@@ -3,7 +3,7 @@ const ALLOW_OUTPUT = false; // 修改以开启
 const ERROR_IMG = [
     404 => 'https://http.cat/404',
     503 => 'https://http.cat/503'
- ];
+];
 
 if (file_exists('../url.csv')) {
     $url = file('../url.csv', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -38,7 +38,7 @@ if (isset($id)) {
 
 
 if (!$code && $is_idValid && $final_id > $length) {
-    // exceed maximum length
+    // 超过最大数
     $code       = 404;
     $target_url = ERROR_IMG[404];
 } else {
@@ -48,11 +48,11 @@ if (!$code && $is_idValid && $final_id > $length) {
 
 /**
  * Variables for OUTPUT
- * $code - mock http code
- * $target_url - the final url
- * $length - amount of the images
+ * $code
+ * $target_url  final url
+ * $length      amount of images
  */
-header('Access-Control-Max-Age: 86400'); //1day
+header('Access-Control-Max-Age: 86400'); // 1day
 header('Access-Control-Allow-Origin: *');
 
 switch ($type) {
