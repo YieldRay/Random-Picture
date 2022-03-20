@@ -37,5 +37,13 @@ location / {
 
 ## Deno 版本
 
-<https://github.com/YieldRay/Random-Picture/blob/master/test/deno.ts>  
-此代码部署到 deno.dev 即可使用
+Deno 版本需要你能够托管一个文本文件，并获取这个文本文件的网址  
+下面托管在 Github
+
+登录<https://dash.deno.com/>  
+![deno.png](https://s2.loli.net/2022/03/20/tLITdUB4kWHe7VO.png)  
+点击 `New Playground`  
+![deno2.png](https://s2.loli.net/2022/03/20/h53uRYrnmQxwAz1.png)  
+进入<https://github.com/YieldRay/Random-Picture/blob/master/test/deno.ts>  
+或者复制<https://github.com/YieldRay/Random-Picture/raw/master/test/deno.ts>所有代码  
+删除编辑器所有原有代码，再将复制的代码粘贴，最后点击 `✔ Saved & Deployed` 即可

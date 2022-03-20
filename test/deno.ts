@@ -1,15 +1,21 @@
-import { serve } from 'https://deno.land/std@0.122.0/http/server.ts';
+import { serve } from 'https://deno.land/std@0.130.0/http/server.ts';
 
 // 修改下面的地址即可，这个地址应该返回一个文本文件，每行一个图片地址
-const recordURL = 'https://raw.githubusercontent.com/YieldRay/Random-Picture/master/url.csv';
-// example:
-// localhost/?id=123
-// localhost/3.jpg
-// localhost/3.png?json
-// localhost/3.jpeg?raw
-// localhost/?raw
-
+const recordURL = 'https://raw.githubusercontents.com/YieldRay/Random-Picture/master/url.csv';
+/**
+ * 有?json则返回json，否则如有?raw直接输出图像否则302跳转
+ * 优先获取123.jpg中的id，其次?id
+ * example:
+ * https://rand.deno.dev/?id=123
+ * https://rand.deno.dev/3.jpg
+ * https://rand.deno.dev/3.png?json
+ * https://rand.deno.dev/3.jpeg?raw
+ * https://rand.deno.dev/?raw
+ */
 const randomNum = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
+const imagesArray = await fetch(recordURL)
+    .then(res => res.text())
+    .then(text => text.split(/\r|\n|\r\n/));
 
 async function handler(req: Request): Promise<Response> {
     const url = new URL(req.url);
@@ -18,30 +24,22 @@ async function handler(req: Request): Promise<Response> {
         return await fetch('https://deno.land/favicon.ico');
     }
     const searchParams = new URLSearchParams(url.search);
-    // 获取id
     try {
-        let tmp: any = await fetch(recordURL);
-        tmp = await tmp.text();
-        tmp = (tmp as string).split(/\r\n|\r|\n/);
-        let stringNumber: any = NaN;
-        if (searchParams.has('id')) {
-            // 指定id
-            stringNumber = searchParams.get('id');
+        let stringNumber: string; // 获取id
+        const matched = url.pathname.match(/^\/(\d+)\.(?:jpg|jpeg|png|gif|webp)$/);
+        if (matched) {
+            stringNumber = matched[1];
         } else {
-            const matched = url.pathname.match(/^\/(\d+)\.(?:jpg|jpeg|png|gif|webp)$/);
-            if (matched) {
-                stringNumber = matched[1];
-            }
+            stringNumber = searchParams.get('id') ?? '';
         }
         let id = Number(stringNumber);
-        if (Number.isNaN(id)) {
-            id = randomNum(0, tmp.length - 1);
+        if (stringNumber.length === 0 || Number.isNaN(id)) {
+            id = randomNum(0, imagesArray.length - 1);
         } else {
-            if (id < 0 || id >= tmp.length) id = randomNum(0, tmp.length - 1);
+            if (id < 0 || id >= imagesArray.length) id = randomNum(0, imagesArray.length - 1);
         }
-        const remoteURL = tmp[id];
-        console.log(`${Date()}: ${id} of ${tmp.length}`);
-
+        const remoteURL = imagesArray[id];
+        console.log(`send ${id} of ${imagesArray.length} with ${req.url}`);
         // 调整发送格式json/raw/302
         if (searchParams.has('json')) {
             return new Response(JSON.stringify({ url: remoteURL }), {
@@ -70,6 +68,4 @@ async function handler(req: Request): Promise<Response> {
     }
 }
 
-const port = process.env.PORT || 8000;
-console.log(`Listening on port ${port}`);
-serve(handler, { port });
+serve(handler);
