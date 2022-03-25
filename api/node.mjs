@@ -1,23 +1,15 @@
 import axios from 'axios';
 // 填入环境变量，或者修改下面的地址，这个地址应该返回一个文本文件，每行一个图片地址
 const recordURL = process.env.RECORD_URL || 'https://raw.githubusercontents.com/YieldRay/Random-Picture/master/url.csv';
-/**
- * 有?json则返回json，否则如有?raw直接输出图像否则302跳转
- * 优先获取123.jpg中的id，其次?id
- * example:
- * https://rand.deno.dev/?id=123
- * https://rand.deno.dev/3.jpg
- * https://rand.deno.dev/3.png?json
- * https://rand.deno.dev/3.jpeg?raw
- * https://rand.deno.dev/?raw
- */
 
+/*
+ * Program Start
+ */
 const randomNum = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 const imagesArray = ['https://http.cat/503'];
 (async () => {
     const text = await axios.get(recordURL).then(res => res.data);
-    console.log(text);
-    const imgs = text.split(/\r|\n|\r\n/);
+    const imgs = text.split(/\r|\n|\r\n/).filter(item => item.length > 5);
     imagesArray.splice(0, 1, ...imgs);
 })();
 
@@ -46,8 +38,12 @@ export default async function (req /*: http.IncomingMessage*/, res /*: http.Serv
     console.log(`send ${id} of ${imagesArray.length} with ${req.url}`);
     // 调整发送格式json/raw/302
     if (searchParams.has('json')) {
-        res.writeHead(200, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-        res.write(JSON.stringify({ url: remoteURL }));
+        res.writeHead(200, {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Cache-Control': 'no-cache',
+        });
+        res.write(JSON.stringify({ id, url: remoteURL }));
         res.end();
     } else if (searchParams.has('raw')) {
         console.log(`send raw ${remoteURL}`);
@@ -60,10 +56,16 @@ export default async function (req /*: http.IncomingMessage*/, res /*: http.Serv
                 'User-Agent': 'PixivIOSApp/6.7.1 (iOS 10.3.1; iPhone8,1)',
             }, // 这个Header允许调用pixiv上面的图片
         });
+        res.writeHead(200, {
+            'Content-Type': response.headers['content-type'],
+            'Access-Control-Allow-Origin': '*',
+            'Cache-Control': 'no-cache',
+        });
         response.data.pipe(res);
     } else {
         res.writeHead(302, {
             Location: remoteURL,
+            'Cache-Control': 'no-cache',
         });
         res.end();
     }

@@ -15,7 +15,7 @@ const recordURL = 'https://raw.githubusercontents.com/YieldRay/Random-Picture/ma
 const randomNum = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 const imagesArray = await fetch(recordURL)
     .then(res => res.text())
-    .then(text => text.split(/\r|\n|\r\n/));
+    .then(text => text.split(/\r|\n|\r\n/).filter(url => url.length > 5));
 
 async function handler(req: Request): Promise<Response> {
     const url = new URL(req.url);
@@ -42,10 +42,11 @@ async function handler(req: Request): Promise<Response> {
         console.log(`send ${id} of ${imagesArray.length} with ${req.url}`);
         // 调整发送格式json/raw/302
         if (searchParams.has('json')) {
-            return new Response(JSON.stringify({ url: remoteURL }), {
+            return new Response(JSON.stringify({ id, url: remoteURL }), {
                 headers: {
                     'access-control-allow-origin': '*',
                     'content-type': 'application/json; charset=utf-8',
+                    'cache-control': 'no-cache',
                 },
             });
         } else if (searchParams.has('raw')) {
@@ -60,6 +61,7 @@ async function handler(req: Request): Promise<Response> {
                 status: 302,
                 headers: {
                     location: remoteURL,
+                    'cache-control': 'no-cache',
                 },
             });
         }
