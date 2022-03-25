@@ -4,42 +4,121 @@
         <title>随机图片api</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/" />
-        <link rel="preload" href="https://cdn.jsdelivr.net/gh/kylelogue/mustard-ui/dist/css/mustard-ui.min.css" as="style" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kylelogue/mustard-ui/dist/css/mustard-ui.min.css" />
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('.scroll-down, .get-started').on('click', function (e) {
-                    e.preventDefault();
-                    $('html, body').animate(
-                        {
-                            scrollTop: $('section:first-of-type').offset().top,
-                        },
-                        300,
-                    );
-                });
-            });
-        </script>
         <style>
-            .get-started {
-                background: #43ccc8;
-                border: 3px solid #50d0cc;
+            html,
+            body {
+                margin: 0;
+                color: #424242;
+                font-weight: 300;
+                font-family: "-apple-system", "BlinkMacSystemFont", "Helvetica Neue", "PingFang SC", "Microsoft YaHei",
+                    "Source Han Sans SC", "Noto Sans CJK SC", "WenQuanYi Micro Hei", "sans-serif";
+                font-size: 16px;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            header {
+                padding: 40vh 0 8vh 0;
+                text-align: center;
+                font-weight: 100;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                height: 100vh;
+                overflow: hidden;
+                background: #a0e5e4;
+            }
+            h1,
+            h2,
+            h3 {
+                font-weight: 400 !important;
+                font-weight: bold;
+                margin: 0;
+            }
+            h1 {
+                font-size: 3.5rem;
+            }
+            h2 {
+                font-size: 2rem;
+                font-weight: 300;
+            }
+            h3 {
+                font-size: 1.5rem;
+                font-weight: 300;
+            }
+            #scroll-down {
+                background-color: transparent;
+                margin-top: 2rem;
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
+                border: 2px solid #424242;
+                cursor: pointer;
+                animation: bounce 2s infinite 2s;
+            }
+            #scroll-down::before {
+                display: block;
+                content: "";
+                transform: rotate(-45deg) translate(0.15rem, 0.15rem);
+                width: 0.4rem;
+                height: 0.4rem;
+                border: 2px solid #424242;
+                border-width: 0px 0 2px 2px;
+            }
+            a {
+                text-decoration: none;
+                color: #79c37c;
+            }
+            main {
+                padding: 1vw;
+            }
+            section {
+                padding: 1rem;
+            }
+            footer {
+                padding: 1vh;
+                text-align: center;
+                background-color: #aaaaaa;
+            }
+            footer a {
+                color: #ddd;
+            }
+            @keyframes bounce {
+                0%,
+                100%,
+                20%,
+                50%,
+                80% {
+                    transform: translateY(0);
+                }
+                40% {
+                    transform: translateY(-10px);
+                }
+                60% {
+                    transform: translateY(-5px);
+                }
+            }
+            pre {
+                background-color: #f5f5f5;
+                padding: 1rem;
+                border-radius: 4px;
+                overflow: auto;
             }
         </style>
     </head>
 
     <body>
-        <header style="background: #a0e5e4">
-            <h1 class="title">随机图片API</h1>
-            <h2 class="subtitle">说明文档</h2>
-            <p class="disclaimer"><a href="./show.html">图片一览</a></p>
-            <button class="get-started button button-primary button-large">详情</button>
-            <a class="scroll-down" href="#"></a>
+        <header>
+            <section>
+                <h1>随机图片API</h1>
+                <h3>说明文档</h3>
+            </section>
+            <button id="scroll-down"></button>
         </header>
         <main>
             <section>
-                <h3><strong>假定 API 部署到 https://example.net/</strong></h3>
+                <h2><strong>假定 API 部署到 https://example.net/</strong></h2>
                 <small>将 /api/ 替换为 /api/node/ 使用 node.js 版本</small>
                 <p>
                     访问
@@ -61,21 +140,21 @@
                 </p>
             </section>
             <section>
-                <h3>
+                <h2>
                     <strong>
                         访问
                         <a href="https://example.net/api/?raw">https://example.net/api/?raw</a>
                     </strong>
-                </h3>
-                <p>服务器读取后输出，默认禁用</p>
+                </h2>
+                <p>服务器读取后输出</p>
             </section>
             <section>
-                <h3>
+                <h2>
                     <strong>
                         访问
                         <a href="https://example.net/api/?json">https://example.net/api/?json</a>
                     </strong>
-                </h3>
+                </h2>
                 <p>输出json</p>
                 <pre class="language-json">
     <code class="language-json">  
@@ -85,15 +164,18 @@
             </section>
         </main>
         <script>
-            $('main').html(
-                $('main')
-                    .html()
-                    .replace(/https:\/\/example.net/g, location.origin),
-            );
+            document.querySelector("main").innerHTML = document
+                .querySelector("main")
+                .innerHTML.replace(/https:\/\/example.net/g, location.origin);
             // 替换example.net
+            document.getElementById("scroll-down").addEventListener("click", function () {
+                document.querySelector("main").scrollIntoView({
+                    behavior: "smooth",
+                });
+            });
         </script>
         <footer>
-            <p class="copyright align-center">
+            <p>
                 <a href="https://github.com/yieldray/Random-Picture">Source Code</a>
             </p>
         </footer>
