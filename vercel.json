@@ -1,10 +1,10 @@
 {
     "functions": {
         "api/index.php": {
-            "runtime": "vercel-php@0.3.1",
+            "runtime": "vercel-php@0.4.0",
             "excludeFiles": "{test/**}",
-            "memory": 256,
-            "maxDuration": 5
+            "memory": 1024,
+            "maxDuration": 10
         }
     },
     "routes": [
