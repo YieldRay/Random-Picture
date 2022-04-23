@@ -23,7 +23,7 @@ async function handler(req: Request): Promise<Response> {
         // return new Response(null, { status: 404 });
         return await fetch("https://deno.land/favicon.ico");
     }
-    const searchParams = new URLSearchParams(url.search);
+    const { searchParams } = url;
     try {
         let stringNumber: string; // 获取id
         const matched = url.pathname.match(/^\/(\d+)\.(?:jpg|jpeg|png|gif|webp)$/);

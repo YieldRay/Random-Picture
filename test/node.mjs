@@ -1,4 +1,5 @@
 import axios from "axios";
+import { url } from "inspector";
 // 需要先安装 axios
 // 填入环境变量，或者修改下面的地址，这个地址应该返回一个文本文件，每行一个图片地址
 const recordURL = process.env.RECORD_URL || "https://raw.githubusercontents.com/YieldRay/Random-Picture/master/url.csv";
@@ -17,11 +18,11 @@ const imagesArray = ["https://http.cat/503"];
 export default async function (req /*: http.IncomingMessage*/, res /*: http.ServerResponse*/) {
     const url = new URL("http://localhost" + req.url);
     if (req.url === "/favicon.ico") {
-        res.writeHead(503);
+        res.writeHead(404);
         res.end();
         return;
     }
-    const searchParams = new URLSearchParams(url.search);
+    const { searchParams } = url;
     let stringNumber; // 获取id
     const matched = url.pathname.match(/^\/(\d+)\.(?:jpg|jpeg|png|gif|webp)$/);
     if (matched) {
