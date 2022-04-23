@@ -24,8 +24,13 @@
 
 fork 后，修改自己仓库的 `url.csv`，然后在 Vercel 平台上导入自己的项目  
 你也可以直接修改<https://github.com/YieldRay/Random-Picture/blob/master/url.csv>来创建 fork  
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?s=https%3A%2F%2Fgithub.com%2FYieldRay%2FRandom-Picture)  
-php 版本也可以直接上传到虚拟主机
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?s=https%3A%2F%2Fgithub.com%2FYieldRay%2FRandom-Picture)
+
+## php 部署到虚拟主机
+
+支持 php >= 5.3  
+直接将下载项目然后上传至虚拟主机即可，此时 API 路径在 `./api` 文件夹下  
+或者下载项目的 `./api/index.php` 和 `./url.csv` ，将这两个文件上传至同一目录即可
 
 ## deno 部署到 deno.dev
 
