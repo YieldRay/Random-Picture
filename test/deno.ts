@@ -1,6 +1,6 @@
-import { serve } from "https://deno.land/std@0.133.0/http/server.ts";
+import { serve } from "https://deno.land/std@0.136.0/http/server.ts";
 
-// 修改下面的地址即可，这个地址应该返回一个文本文件，每行一个图片地址
+// 如果修改了环境变量 RECORD_URL 则无需修改任何代码，否则，修改下面的地址，这个地址应该返回一个文本文件，每行一个图片地址
 const recordURL = "https://raw.githubusercontents.com/YieldRay/Random-Picture/master/url.csv";
 /**
  * 有?json则返回json，否则如有?raw直接输出图像否则302跳转
@@ -13,7 +13,7 @@ const recordURL = "https://raw.githubusercontents.com/YieldRay/Random-Picture/ma
  * https://rand.deno.dev/?raw
  */
 const randomNum = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
-const imagesArray = await fetch(recordURL)
+const imagesArray = await fetch(Deno.env.get("RECORD_URL") || recordURL)
     .then((res) => res.text())
     .then((text) => text.split(/\r|\n|\r\n/).filter((url) => url.length > 5));
 

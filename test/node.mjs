@@ -1,5 +1,4 @@
 import axios from "axios";
-import { url } from "inspector";
 // 需要先安装 axios
 // 填入环境变量，或者修改下面的地址，这个地址应该返回一个文本文件，每行一个图片地址
 const recordURL = process.env.RECORD_URL || "https://raw.githubusercontents.com/YieldRay/Random-Picture/master/url.csv";
